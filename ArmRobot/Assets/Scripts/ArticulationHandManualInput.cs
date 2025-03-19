@@ -1,18 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ArticulationHandManualInput : MonoBehaviour
 {
     public GameObject hand;
-
-    void Update()
-    {
-        // manual input
-        float input = Input.GetAxis("Fingers");
-        PincherController pincherController = hand.GetComponent<PincherController>();
-        pincherController.gripState = GripStateForInput(input);
-    }
 
     // INPUT HELPERS
 
@@ -30,5 +20,13 @@ public class ArticulationHandManualInput : MonoBehaviour
         {
             return GripState.Fixed;
         }
+    }
+
+    void Update()
+    {
+        // manual input
+        float input = Input.GetAxis("Fingers");
+        PincherController pincherController = hand.GetComponent<PincherController>();
+        pincherController.gripState = GripStateForInput(input);
     }
 }
