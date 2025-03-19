@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class RobotController : MonoBehaviour
 {
@@ -11,8 +8,15 @@ public class RobotController : MonoBehaviour
         public string inputAxis;
         public GameObject robotPart;
     }
+
     public Joint[] joints;
 
+    public void RotateJoint(int jointIndex, RotationDirection direction)
+    {
+        StopAllJointRotations();
+        Joint joint = joints[jointIndex];
+        UpdateRotationState(direction, joint.robotPart);
+    }
 
     // CONTROL
 
@@ -25,13 +29,6 @@ public class RobotController : MonoBehaviour
         }
     }
 
-    public void RotateJoint(int jointIndex, RotationDirection direction)
-    {
-        StopAllJointRotations();
-        Joint joint = joints[jointIndex];
-        UpdateRotationState(direction, joint.robotPart);
-    }
-
     // HELPERS
 
     static void UpdateRotationState(RotationDirection direction, GameObject robotPart)
@@ -39,7 +36,4 @@ public class RobotController : MonoBehaviour
         ArticulationJointController jointController = robotPart.GetComponent<ArticulationJointController>();
         jointController.rotationState = direction;
     }
-
-
-
 }
